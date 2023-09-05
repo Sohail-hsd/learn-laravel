@@ -9,7 +9,11 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        return view('register');
+        $url = "register";
+        $title = "Create Customers";
+        $customers = null;
+        $data = compact('url', 'title', 'customers');
+        return view('register')->with($data);
     }
 
     public function register(Request $request)
@@ -20,8 +24,8 @@ class RegistrationController extends Controller
         $customer->email = $request->input("email");
         $customer->gender = $request->input("gender");
         $customer->address = $request->input("address");
-        $customer->state = 1;
-        // $customer->city = $request->input("city");
+        $customer->state = $request->input('state');
+        $customer->city = $request->input("city");
 
         $customer->save(); // Save the customer record
 
